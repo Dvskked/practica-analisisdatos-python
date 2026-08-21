@@ -1,0 +1,11 @@
+﻿variable_1,variable_2,r_pearson,p_valor,significativo
+precio_unitario,total,0.799,0.0,True
+cantidad,total,0.342,0.0,True
+descuento_pct,satisfaccion,0.122,8.73530190102635e-41,True
+descuento_pct,total,-0.048,1.1742593303428267e-07,True
+total,satisfaccion,-0.02,0.025074860222592813,True
+cantidad,descuento_pct,-0.016,0.08277099025826161,False
+cantidad,satisfaccion,-0.011,0.2241199043211013,False
+precio_unitario,cantidad,-0.008,0.4104543650962157,False
+precio_unitario,satisfaccion,-0.008,0.356149628678256,False
+precio_unitario,descuento_pct,0.004,0.6264845950577531,False
