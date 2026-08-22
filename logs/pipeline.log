@@ -106,3 +106,69 @@ Potenciales       300                225.6               3.0       1068.6       
 2026-08-20 22:53:56 | INFO     | retail_analytics |   Paso 7 · Segmentación RFM + K-Means             4.16 s
 2026-08-20 22:53:56 | INFO     | retail_analytics |   Paso 8 · Dashboards interactivos                0.35 s
 2026-08-20 22:53:56 | INFO     | retail_analytics |   TOTAL                                           6.62 s
+2026-08-21 23:23:08 | INFO     | retail_analytics | RETAIL ANALYTICS — pipeline completo (semilla=42)
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | PASO 1 · GENERACIÓN DE DATOS SINTÉTICOS
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | PASO 2 · CARGA Y LIMPIEZA DE DATOS
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | Calidad ANTES de limpiar:
+                           tipo  nulos  pct_nulos  unicos
+id_transaccion              str      0        0.0     800
+fecha            datetime64[us]      0        0.0     795
+id_cliente                  str      0        0.0      92
+categoria                   str      0        0.0       6
+producto                    str      0        0.0      30
+precio_unitario         float64      0        0.0      29
+cantidad                  int64      0        0.0       5
+descuento_pct           float64      0        0.0      26
+total                   float64      0        0.0     262
+canal                       str      0        0.0       2
+metodo_pago                 str      0        0.0       4
+ciudad                      str      0        0.0       7
+satisfaccion            float64      0        0.0      30
+2026-08-21 23:23:08 | INFO     | retail_analytics | Calidad DESPUÉS de limpiar: 800 filas (0 eliminadas)
+2026-08-21 23:23:08 | INFO     | retail_analytics | Dataset limpio guardado en C:\Users\siriu\OneDrive\Documentos\Default Project\proyecto-analisis-datos\data\processed\ventas_limpio.csv
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | PASO 3 · KPIS DE NEGOCIO
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | KPIs exportados a C:\Users\siriu\OneDrive\Documentos\Default Project\proyecto-analisis-datos\reports\kpis.json
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | PASO 4 · TABLAS DESCRIPTIVAS
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | Tabla exportada: C:\Users\siriu\OneDrive\Documentos\Default Project\proyecto-analisis-datos\reports\resumen_categoria.csv
+2026-08-21 23:23:08 | INFO     | retail_analytics | Tabla exportada: C:\Users\siriu\OneDrive\Documentos\Default Project\proyecto-analisis-datos\reports\top_productos.csv
+2026-08-21 23:23:08 | INFO     | retail_analytics | Tabla exportada: C:\Users\siriu\OneDrive\Documentos\Default Project\proyecto-analisis-datos\reports\resumen_ciudad.csv
+2026-08-21 23:23:08 | INFO     | retail_analytics | Tabla exportada: C:\Users\siriu\OneDrive\Documentos\Default Project\proyecto-analisis-datos\reports\estadisticas_ticket.csv
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:08 | INFO     | retail_analytics | PASO 5 · ANÁLISIS TEMPORAL
+2026-08-21 23:23:08 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:09 | INFO     | retail_analytics | Mejor mes interanual: 09/2025 con +119.9 % de crecimiento
+2026-08-21 23:23:09 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:09 | INFO     | retail_analytics | PASO 6 · CORRELACIONES
+2026-08-21 23:23:09 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:09 | INFO     | retail_analytics | precio_unitario ↔ total: r=+0.807 (p=4.333e-185) → significativa
+2026-08-21 23:23:09 | INFO     | retail_analytics | cantidad ↔ total: r=+0.355 (p=3.693e-25) → significativa
+2026-08-21 23:23:09 | INFO     | retail_analytics | descuento_pct ↔ satisfaccion: r=+0.096 (p=0.006662) → significativa
+2026-08-21 23:23:09 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:09 | INFO     | retail_analytics | PASO 7 · SEGMENTACIÓN RFM + K-MEANS
+2026-08-21 23:23:09 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:11 | INFO     | retail_analytics | K-Means (k=4): inercia=42 | silueta=0.562
+2026-08-21 23:23:11 | INFO     | retail_analytics | Perfiles de segmento:
+   segmento  clientes  recencia_media_dias  frecuencia_media  gasto_medio  pct_clientes
+  Campeones         2                  1.5              84.5      32694.3           2.2
+     Leales        14                 20.1              21.5       8218.3          15.2
+Potenciales        57                 89.8               5.3       1726.1          62.0
+  En riesgo        19                503.1               1.4        637.2          20.7
+2026-08-21 23:23:11 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:11 | INFO     | retail_analytics | RESUMEN DE EJECUCIÓN
+2026-08-21 23:23:11 | INFO     | retail_analytics | ======================================================================
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 1 · Generación de datos sintéticos         0.01 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 2 · Carga y limpieza de datos              0.03 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 3 · KPIs de negocio                        0.00 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 4 · Tablas descriptivas                    0.02 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 5 · Análisis temporal                      0.97 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 6 · Correlaciones                          0.39 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   Paso 7 · Segmentación RFM + K-Means             2.02 s
+2026-08-21 23:23:11 | INFO     | retail_analytics |   TOTAL                                           3.44 s
