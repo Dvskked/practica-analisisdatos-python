@@ -25,6 +25,8 @@ import sys
 import time
 from pathlib import Path
 
+import pandas as pd
+
 # Permitir ejecutar el script directamente sin instalar el paquete:
 # se añade la raíz del proyecto al path de búsqueda de módulos.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -49,6 +51,7 @@ from retail_analytics.analysis.segmentation import (
     calcular_rfm,
     escalar_features,
     metodo_codo,
+    nombrar_segmentos,
     perfil_segmentos,
 )
 from retail_analytics.analysis.temporal import (
@@ -102,7 +105,7 @@ def paso_generar_datos(args: argparse.Namespace) -> str:
     return f"{len(ventas):,} transacciones ({args.inicio} → {args.fin})"
 
 
-def paso_limpiar_datos() -> object:
+def paso_limpiar_datos() -> pd.DataFrame:
     """Paso 2: carga el CSV crudo, limpia y añade variables derivadas."""
     ventas_crudas = cargar_csv(config.ARCHIVO_VENTAS_RAW)
     logger.info("Calidad ANTES de limpiar:\n%s", resumen_calidad(ventas_crudas).to_string())
@@ -116,7 +119,7 @@ def paso_limpiar_datos() -> object:
     return ventas_limpias
 
 
-def paso_kpis(ventas) -> None:
+def paso_kpis(ventas: pd.DataFrame) -> None:
     """Paso 3: calcula KPIs globales y los exporta a JSON."""
     kpis = calcular_kpis(ventas)
     print("\n" + imprimir_kpis(kpis) + "\n")
@@ -126,7 +129,7 @@ def paso_kpis(ventas) -> None:
     logger.info("KPIs exportados a %s", ruta_json)
 
 
-def paso_tablas_descriptivas(ventas) -> None:
+def paso_tablas_descriptivas(ventas: pd.DataFrame) -> None:
     """Paso 4: exporta tablas por categoría, producto, ciudad y ticket."""
     tablas = {
         "resumen_categoria.csv": resumen_por_categoria(ventas),
@@ -140,7 +143,7 @@ def paso_tablas_descriptivas(ventas) -> None:
         logger.info("Tabla exportada: %s", destino)
 
 
-def paso_analisis_temporal(ventas) -> pd.DataFrame:
+def paso_analisis_temporal(ventas: pd.DataFrame) -> pd.Series:
     """Paso 5: series mensuales, media móvil, descomposición e interanual."""
     mensual = serie_mensual(ventas)
     mm3 = media_movil(mensual, ventana=3)
@@ -168,7 +171,7 @@ def paso_analisis_temporal(ventas) -> pd.DataFrame:
     return interanual
 
 
-def paso_correlaciones(ventas) -> None:
+def paso_correlaciones(ventas: pd.DataFrame) -> None:
     """Paso 6: matriz de correlaciones y contraste de significancia."""
     guardar_figura(grafico_mapa_calor(ventas), "mapa_correlaciones")
 
@@ -186,7 +189,7 @@ def paso_correlaciones(ventas) -> None:
         )
 
 
-def paso_segmentacion(ventas) -> tuple[object, float | None]:
+def paso_segmentacion(ventas: pd.DataFrame) -> tuple[pd.DataFrame, float | None]:
     """Paso 7: RFM + K-Means con método del codo y perfiles de segmento."""
     rfm = calcular_rfm(ventas)
     X = escalar_features(rfm)
@@ -198,8 +201,6 @@ def paso_segmentacion(ventas) -> tuple[object, float | None]:
     logger.info("K-Means (k=%s): inercia=%.0f | silueta=%s", K_CLUSTERS, modelo.inertia_, silueta)
 
     rfm["cluster"] = etiquetas
-    from retail_analytics.analysis.segmentation import nombrar_segmentos
-
     mapeo = nombrar_segmentos(rfm, etiquetas)
     rfm["segmento"] = rfm["cluster"].map(mapeo)
 
@@ -212,7 +213,7 @@ def paso_segmentacion(ventas) -> tuple[object, float | None]:
     return rfm, silueta
 
 
-def paso_interactivas(ventas) -> None:
+def paso_interactivas(ventas: pd.DataFrame) -> None:
     """Paso 8: dashboards HTML con Plotly."""
     guardar_html(linea_interactiva(serie_mensual(ventas), titulo="Ventas mensuales interactivas"), "interactivo_serie_mensual")
     guardar_html(sunburst_categorias(ventas, ["canal", "categoria"], titulo="Ingresos: canal → categoría"), "interactivo_sunburst")

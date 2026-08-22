@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 
 from retail_analytics.config import COLUMNAS_VENTAS
@@ -51,7 +52,7 @@ class TestGenerarVentas:
 
 class TestGenerarClientes:
     def test_forma_y_edades(self):
-        clientes = generar_clientes(50, __import__("numpy").random.default_rng(1))
+        clientes = generar_clientes(50, np.random.default_rng(1))
         assert len(clientes) == 50
         assert clientes["edad"].between(18, 75).all()
         assert clientes["id_cliente"].is_unique
