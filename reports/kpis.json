@@ -1,12 +1,12 @@
 {
-  "ventas_totales": 4378356.12,
-  "n_transacciones": 12000,
-  "ticket_promedio": 364.86,
-  "mediana_ticket": 147.0,
-  "unidades_vendidas": 24509,
-  "clientes_unicos": 1206,
+  "ventas_totales": 290937.34,
+  "n_transacciones": 800,
+  "ticket_promedio": 363.67,
+  "mediana_ticket": 152.66,
+  "unidades_vendidas": 1639,
+  "clientes_unicos": 92,
   "productos_distintos": 30,
-  "descuento_medio_pct": 3.04,
-  "satisfaccion_media": 3.91,
-  "periodo": "01/01/2024 — 31/12/2025"
+  "descuento_medio_pct": 2.98,
+  "satisfaccion_media": 3.95,
+  "periodo": "02/01/2024 — 31/12/2025"
 }

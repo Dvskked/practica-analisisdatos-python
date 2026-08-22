@@ -106,7 +106,7 @@ def nombrar_segmentos(rfm: pd.DataFrame, etiquetas: np.ndarray) -> dict[int, str
     de :data:`NOMBRES_SEGMENTOS` en ese orden: el grupo que más gasta son los
     "Campeones" y el que menos, los "Perdidos".
     """
-    gasto_por_cluster = pd.Series(etiquetas).groupby(etiquetas).apply(lambda e: rfm.loc[e.index, "valor_monetario"].mean())
+    gasto_por_cluster = rfm.assign(cluster=etiquetas).groupby("cluster", observed=True)["valor_monetario"].mean()
     orden = gasto_por_cluster.sort_values(ascending=False).index.tolist()
     return {cluster: NOMBRES_SEGMENTOS[posicion] for posicion, cluster in enumerate(orden)}
 

@@ -11,6 +11,7 @@ para que el código funcione también en servidores y CI sin pantalla.
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 import matplotlib
 
@@ -46,7 +47,7 @@ def aplicar_estilo() -> None:
 aplicar_estilo()
 
 
-def guardar_figura(fig: "plt.Figure", nombre: str, cerrar: bool = True) -> "Path":
+def guardar_figura(fig: plt.Figure, nombre: str, cerrar: bool = True) -> Path:
     """Guarda una figura como PNG de alta resolución en ``reports/figures``.
 
     Parámetros
