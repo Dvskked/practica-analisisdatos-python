@@ -118,8 +118,7 @@ proyecto-analisis-datos/
 ├── tests/                     ← Suite de pruebas pytest
 │   ├── test_generator.py
 │   ├── test_cleaner.py
-│   ├── test_descriptive.py
-│   ├── test_temporal.py
+│   ├── test_descriptive.py    ← Incluye los tests temporales y de correlación
 │   └── test_segmentation.py
 │
 ├── data/
